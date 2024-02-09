@@ -1,5 +1,8 @@
 pipeline {
-	agent { docker { image 'maven:3.6.3' } }
+	agent { docker { image 'maven:3.6.3' }
+		services :
+			-docker:dind
+	}
 	
 	stages {
 		stage('Build') {
