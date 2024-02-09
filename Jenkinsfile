@@ -1,9 +1,4 @@
 pipeline {
-  variables:
-  DOCKER_HOST: tcp://localhost:2376/
-  DOCKER_DRIVER: overlay2
-  DOCKER_TLS_CERTDIR: ""
-  IMAGE_NAME: 'maven:3.6.3'
 	agent { docker { image 'maven:3.6.3' } }
 	stages {
 		stage('Build') {
