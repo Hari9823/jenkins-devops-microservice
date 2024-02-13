@@ -6,7 +6,7 @@ pipeline {
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 	}
 	stages {
-		stage('Build') {
+		stage('Checkout') {
 			steps {
 				echo "Build"
 				echo "Path - $PATH"
@@ -17,14 +17,19 @@ pipeline {
 				echo "BUILD_URL - $env.BUILD_URL"
 			}
 		}
+		stage('Compile'){
+			steps{
+				sh "maven clean compile"
+			}
+		}
 		stage('Test') {
 			steps {
-				echo "Test"
+				sh "maven test"
 			}
 		}
 		stage('Integration Test') {
 			steps {
-				echo "Integration Test"
+				sh  "maven failsafe:integration-test failsafe:verify"
 			}
 		}
 	}
